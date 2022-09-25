@@ -1,42 +1,58 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { getAPIiUrlParams } from './fetch';
-let inputVal;
-const axios = require('axios').default;
+import { cleanerEl, renderGalleryList } from './render';
+import NewApiServece from './fetch';
 
-const formEl = document.querySelector('#search-form');
-formEl.addEventListener('submit', submitHandler);
+const onSearch = document.querySelector('#search-form');
+const onLoadMore = document.querySelector('.load-more');
+const newApiServece = new NewApiServece();
+const divOnLoadMore = document.querySelector('div_button');
+
+
+onSearch.addEventListener('submit', submitHandler);
 
 function submitHandler(event) {
   event.preventDefault();
-  const {
-    elements: [input],
-  } = event.target;
-  getAPIiUrlParams(input.value)
-    .then(response => {
-      console.log(response);
-      return response.json();
-    })
-    .then(data => {
-      console.dir({ data });
-      const { total, hits } = data;
-      console.log(hits);
-      if (hits) {
+  newApiServece.query = event.currentTarget.elements.searchQuery.value;
+  newApiServece.resetPage();
+  cleanerEl();
+  newApiServece
+    .fetchGallery()
+    .then(({ data }) => {
+      if (data.hits.length === 0) {
+        cleanerEl();
         Notify.info(
           'Sorry, there are no images matching your search query. Please try again.'
-          );
-          const [
-            downloads,
-            comments,
-            views,
-            likes,
-            tags,
-            largeImageURL,
-            webformatURL,
-          ] = hits;
-          hits.map(() => { console.log(tags, likes, views); })
+        );
+      console.log(newApiServece.query); 
       }
+      renderGalleryList(data.hits);
+    })
+    .catch(error => {
+      console.log(error);
+      newApiServece.resetPage();
+    });
+// divOnLoadMore.append('onLoadMore');
+  onLoadMore.style.visibility = '';  
+}
+
+
+// onLoadMore.remove();
+onLoadMore.style.visibility = "hidden";
+onLoadMore.addEventListener('click', event => {
+  event.preventDefault();
+  newApiServece
+.fetchGallery()
+    .then(({ data }) => {
+      if (data.hits.length === 0) {
+        cleanerEl();
+        Notify.info(
+          'Sorry, there are no images matching your search query. Please try again.'
+        );
+        }
+        console.log(newApiServece.query) 
+      renderGalleryList(data.hits);
     })
     .catch(error => {
       console.log(error);
     });
-}
+    });
