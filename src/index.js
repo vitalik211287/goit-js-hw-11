@@ -29,9 +29,10 @@ function submitHandler(event) {
     })
     .catch(error => {
       console.log(error);
-      newApiServece.resetPage();
+     
     });
 // divOnLoadMore.append('onLoadMore');
+ newApiServece.resetPage();
   onLoadMore.style.visibility = '';  
 }
 
