@@ -1,4 +1,4 @@
-import { API_KEY, URL } from './const';
+import { API_KEY, URL } from './constants';
 const axios = require('axios').default;
 //
 // export default function fetchGallery(name) {
