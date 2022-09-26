@@ -28,11 +28,10 @@ export default class NewApiServece {
   }
 
   get page() {
-    return this.newPage;
+    return this._page;
   }
 
   set page(newPage) {
-    return (this.newPage = newPage);
-    }
-    
+    this._page = newPage;
+  }
 }

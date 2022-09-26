@@ -5,7 +5,6 @@ import NewApiServece from './fetch';
 const onSearch = document.querySelector('#search-form');
 const onLoadMore = document.querySelector('.load-more');
 const newApiServece = new NewApiServece();
-const divOnLoadMore = document.querySelector('div_button');
 
 
 onSearch.addEventListener('submit', submitHandler);
@@ -23,37 +22,33 @@ function submitHandler(event) {
         Notify.info(
           'Sorry, there are no images matching your search query. Please try again.'
         );
-      console.log(newApiServece.query); 
       }
       renderGalleryList(data.hits);
     })
     .catch(error => {
       console.log(error);
-     
     });
-// divOnLoadMore.append('onLoadMore');
- newApiServece.resetPage();
-  onLoadMore.style.visibility = '';  
+  // divOnLoadMore.append('onLoadMore');
+  onLoadMore.style.visibility = 'visible';
 }
 
-
 // onLoadMore.remove();
-onLoadMore.style.visibility = "hidden";
+onLoadMore.style.visibility = 'hidden';
 onLoadMore.addEventListener('click', event => {
   event.preventDefault();
   newApiServece
-.fetchGallery()
+    .fetchGallery()
     .then(({ data }) => {
       if (data.hits.length === 0) {
         cleanerEl();
         Notify.info(
           'Sorry, there are no images matching your search query. Please try again.'
         );
-        }
-        console.log(newApiServece.query) 
+      }
+      console.log(newApiServece.query);
       renderGalleryList(data.hits);
     })
     .catch(error => {
       console.log(error);
     });
-    });
+});
