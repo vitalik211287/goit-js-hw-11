@@ -8,24 +8,27 @@ const axios = require('axios').default;
 
 export default class NewApiServece {
   constructor() {
-    this.searchQuery = '';
-    this.page = 1;
+    this._searchQuery = '';
+    this._page = 1;
     this.per_page = 42
   }
   fetchGallery() {
-    const url = `${URL}${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.per_page}`;
+    const url = `${URL}${API_KEY}&q=${this.query}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.per_page}`;
     this.page += 1;
     return axios.get(url);
   }
   resetPage() {
     this.page = 1;
   }
+
+  // checkLastPage() {if (data.totalHits === newApiServece.page * newApiServece.per_page) }
+
   get query() {
-    return this.searchQuery;
+    return this._searchQuery;
   }
 
   set query(newQuery) {
-    return (this.searchQuery = newQuery);
+    return (this._searchQuery = newQuery);
   }
 
   get page() {
@@ -35,4 +38,5 @@ export default class NewApiServece {
   set page(newPage) {
     this._page = newPage;
   }
+  
 }

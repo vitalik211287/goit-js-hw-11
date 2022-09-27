@@ -29,6 +29,11 @@ async function submitHandler(event) {
       );
       return;
     }
+    //   if (data.totalHits === newApiServece.page * newApiServece.per_page) {
+    //   Notify.info('We`re sorry, but you`ve reached the end of search results.');
+
+    // }
+   
     Notify.info(`Hooray! We found ${data.total} images.`);
     renderGalleryList(data.hits);
     onLoadMore.style.visibility = 'visible';
