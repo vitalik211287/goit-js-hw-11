@@ -49,7 +49,7 @@ onLoadMore.addEventListener('click', async event => {
         'Sorry, there are no images matching your search query. Please try again.'
       );
     }
-    if (data.totalHits === newApiServece.page) {
+    if (data.totalHits === newApiServece.page * newApiServece.per_page) {
       Notify.info('We`re sorry, but you`ve reached the end of search results.');
     }
    
