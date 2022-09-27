@@ -11,6 +11,7 @@ onLoadMore.style.visibility = 'hidden';
 
 async function submitHandler(event) {
   event.preventDefault();
+  onLoadMore.style.visibility = 'hidden';
   const inputValue = event.currentTarget.elements.searchQuery.value
   if(!inputValue){
     return
@@ -29,8 +30,8 @@ async function submitHandler(event) {
       return;
     }
     Notify.info(`Hooray! We found ${data.total} images.`);
-    onLoadMore.style.visibility = 'visible';
     renderGalleryList(data.hits);
+    onLoadMore.style.visibility = 'visible';
   } catch (error) {
     Notify.failure(`Oops! Something went wrong...`);
     console.error(error);
