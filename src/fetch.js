@@ -10,9 +10,10 @@ export default class NewApiServece {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.per_page = 42
   }
   fetchGallery() {
-    const url = `${URL}${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=42`;
+    const url = `${URL}${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.per_page}`;
     this.page += 1;
     return axios.get(url);
   }
