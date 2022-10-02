@@ -6,7 +6,6 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const galleryEl = document.querySelector(".gallery");
 
 function renderGalleryList(hits) {
-     console.log(hits );
       const addedElString = hits
         .map(
           ({
@@ -56,24 +55,4 @@ function cleanerEl() {
    galleryEl.innerHTML = '';  
 }
 
-    
-    
-// function galleryRenderEl() {
-//     getAPIiUrlParams()
-//         .then(data => {
-//             console.log(data);
-//             const { total, totalHits, hits } = data;
-//             console.log(hits);
-//             if (hits.length === 0) {
-//                 cleanerEl();
-//                 Notify.info(
-//                     'Sorry, there are no images matching your search query. Please try again.'
-//                 );
-//             }
-//             renderGalleryList(hits);
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         });
-// }
 export { renderGalleryList, cleanerEl,galleryRenderEl }; 
