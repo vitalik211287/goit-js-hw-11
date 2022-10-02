@@ -6,7 +6,7 @@ export default class NewApiServece {
   constructor() {
     this._searchQuery = '';
     this._page = 1;
-    this.per_page = 9;
+    this.per_page = 40;
   }
   fetchGallery() {
     const url = `${URL}${API_KEY}&q=${this.query}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.per_page}`;
