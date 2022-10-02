@@ -30,17 +30,16 @@ async function submitHandler(event) {
       );
       return;
     }
-    if (newApiServece.page * newApiServece.per_page >= data.totalHits) {
-      Notify.info('We`re sorry, but you`ve reached the end of search results.');
-      buttonHidden();
-      renderGalleryList(data.hits);
-      return;
-    }
 
     Notify.info(`Hooray! We found ${data.total} images.`);
     renderGalleryList(data.hits);
     buttonVsible();
     newApiServece.page += 1;
+
+    if (data.totalHits <= newApiServece.page * newApiServece.per_page) {
+      buttonHidden();
+      return;
+    }
   } catch (error) {
     Notify.failure(`Oops! Something went wrong...`);
     console.error(error);
