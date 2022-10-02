@@ -33,10 +33,12 @@ async function submitHandler(event) {
 
     Notify.info(`Hooray! We found ${data.total} images.`);
     renderGalleryList(data.hits);
-    buttonVsible();
+    buttonVisible();
     newApiServece.page += 1;
 
-    if (data.totalHits <= newApiServece.page * newApiServece.per_page) {
+    if (
+      data.totalHits === newApiServece.page * newApiServece.per_page       
+    ) {
       buttonHidden();
       return;
     }
@@ -54,12 +56,11 @@ onLoadMore.addEventListener('click', async event => {
     if (newApiServece.page * newApiServece.per_page >= data.totalHits) {
       Notify.info('We`re sorry, but you`ve reached the end of search results.');
       renderGalleryList(data.hits);
-      buttonHidden();
       return;
     }
 
     renderGalleryList(data.hits);
-    buttonVsible();
+    buttonVisible();
     newApiServece.page += 1;
   } catch (error) {
     Notify.failure(`Oops! Something went wrong...`);
@@ -67,7 +68,7 @@ onLoadMore.addEventListener('click', async event => {
   }
 });
 
-function buttonVsible() {
+function buttonVisible() {
   onLoadMore.style.visibility = 'visible';
 }
 function buttonHidden() {
