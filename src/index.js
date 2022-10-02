@@ -37,7 +37,8 @@ async function submitHandler(event) {
     newApiServece.page += 1;
 
     if (
-      data.totalHits === newApiServece.page * newApiServece.per_page       
+      newApiServece.page * newApiServece.per_page === data.totalHits ||
+      data.totalHits === newApiServece.per_page
     ) {
       buttonHidden();
       return;
